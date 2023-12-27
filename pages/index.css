@@ -1,0 +1,124 @@
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts.css");
+@import url("../blocks/page.css");
+@import url("../blocks/header.css");
+@import url("../blocks/profile.css");
+@import url("../blocks/cards.css");
+@import url("../blocks/card.css");
+@import url("../blocks/footer.css");
+
+@media screen and (max-width: 775px) {
+  .profile__title {
+    font-size: 22px;
+    max-width: 200px;
+  }
+  .profile__info {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .profile {
+    width: 100%;
+    min-height: 286px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profile__image {
+    margin: 0;
+  }
+  .profile__info {
+    width: 282px;
+    min-height: 50px;
+    margin: 30px 0 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+    width: 196px;
+    min-height: 22px;
+  }
+  .profile__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    min-height: 14px;
+    text-align: center;
+  }
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+  .profile__add-button {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    width: 100%;
+    min-height: 56px;
+    padding: 28px 0 42px 27px;
+  }
+  .header__image {
+    width: 126px;
+    height: 24px;
+  }
+  .content {
+    width: 100vw;
+  }
+  .profile {
+    width: 100%;
+    min-height: 286px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profile__image {
+    margin: 0;
+  }
+  .profile__info {
+    width: 282px;
+    min-height: 50px;
+    margin: 30px 0 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+  .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+    width: 196px;
+    min-height: 22px;
+  }
+  .profile__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    min-height: 14px;
+    text-align: center;
+  }
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+  .profile__add-button {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .footer__copyright {
+    width: 282px;
+    height: 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 48px auto 36px;
+  }
+}
