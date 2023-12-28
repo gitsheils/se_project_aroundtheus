@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   align-items: center;
+  padding-top: 40px;
 }
 
 .profile__info {
@@ -27,6 +28,11 @@
   font-weight: 500;
   margin: 0;
   padding: 0;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 373px;
 }
 
 .profile__subtitle {
@@ -45,7 +51,15 @@
   height: 24px;
   background: transparent center no-repeat url(../images/Edit\ Button.svg);
   grid-area: button;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fff;
   box-sizing: border-box;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }
 
 .profile__add-button {
@@ -53,4 +67,13 @@
   height: 50px;
   background: transparent center no-repeat url(../images/Add\ Button.svg);
   margin-left: auto;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: #fff;
+  box-sizing: border-box;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }

@@ -1,7 +1,10 @@
 .header {
-  padding-top: 45px;
   min-height: 74px;
-  padding-bottom: 40px;
+  padding-top: 45px;
+
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: rgb(84 84 84 / 0.7);
 }
 
 .header__image {
