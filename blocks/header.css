@@ -11,3 +11,16 @@
   width: 173px;
   height: 33px;
 }
+
+@media screen and (max-width: 320px) {
+  .header {
+    width: 100%;
+    min-height: 56px;
+    padding: 28px 0 0 0;
+  }
+  .header__image {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+}

@@ -9,7 +9,7 @@
 **Intro**
 
 This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
-A short video explanation of how this project was setup is on google drive (https://drive.google.com/file/d/1R6RjZTyXRgcobEQeiH2E1_8dPWNBzcSe/view?usp=sharing).
+A short video explanation of how this project was setup is on google drive (https://drive.google.com/file/d/1R6RjZTyXRgcobEQeiH2E1_8dPWNBzcSe/view?usp=sharing). The link to this project: https://gitsheils.github.io/se_project_aroundtheus/.
 
 **Figma**
 

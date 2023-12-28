@@ -7,3 +7,9 @@
   justify-content: center;
   grid-gap: 20px 17px;
 }
+
+@media screen and (max-width: 580px) {
+  .cards__list {
+    margin-top: 36px;
+  }
+}
