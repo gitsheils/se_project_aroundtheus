@@ -7,7 +7,6 @@
   top: 0;
   left: 0;
 }
-
 .modal_opened {
   display: block;
 }
@@ -25,6 +24,21 @@
   border-radius: 10px;
 }
 
+.modal__button-close {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+  background: url("../images/Close\ Icon.svg") transparent center no-repeat;
+  border: none;
+}
+
+.modal__button-close:hover {
+  opacity: 0.6;
+}
+
 .modal__title {
   max-width: 330px;
   width: 100%;
@@ -39,6 +53,14 @@
   .modal__container {
     max-width: 282px;
     min-height: 322px;
+  }
+
+  .modal__button-close {
+    width: 26px;
+    height: 26px;
+
+    top: -40px;
+    right: 0;
   }
 
   .modal__title {
