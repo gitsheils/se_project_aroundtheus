@@ -39,9 +39,9 @@ function fillProfileForm() {
   inputName.value = profileTitle.textContent;
   inputDescription.value = profileSubtitle.textContent;
 }
-fillProfileForm();
 
 buttonEdit.addEventListener("click", () => {
+  fillProfileForm();
   profileEditModal.classList.add("modal_opened");
 });
 buttonClose.addEventListener("click", () => {
