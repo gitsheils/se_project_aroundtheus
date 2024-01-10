@@ -38,6 +38,10 @@
   margin-bottom: 36px;
 }
 
+.form__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 @media screen and (max-width: 320px) {
   .form {
     max-width: 238px;

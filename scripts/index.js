@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -26,39 +26,40 @@ let initialCards = [
   },
 ];
 
-let buttonEdit = document.querySelector(".profile__edit-button");
-let modal = document.querySelector(".modal");
-let buttonClose = document.querySelector(".modal__button-close");
+const buttonEdit = document.querySelector(".profile__edit-button");
+const profileEditModal = document.querySelector(".modal");
+const buttonClose = document.querySelector(".modal__button-close");
 
-buttonEdit.addEventListener("click", () => {
-  modal.classList.add("modal_opened");
-});
-buttonClose.addEventListener("click", () => {
-  modal.classList.remove("modal_opened");
-});
-
-const input = modal.querySelectorAll(".form__input");
+const input = profileEditModal.querySelectorAll(".form__input");
 const inputName = input[0];
 const inputDescription = input[1];
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const buttonSave = modal.querySelector(".form__button");
-const profileEditForm = modal.querySelector(".form");
-const cardTemplate = document.querySelector("#card-template").content;
-const cardList = document.querySelector(".cards__list");
-
-function profileInfoToForm() {
+function fillProfileForm() {
   inputName.value = profileTitle.textContent;
   inputDescription.value = profileSubtitle.textContent;
 }
+fillProfileForm();
 
-buttonEdit.addEventListener("click", profileInfoToForm);
+buttonEdit.addEventListener("click", () => {
+  profileEditModal.classList.add("modal_opened");
+});
+buttonClose.addEventListener("click", () => {
+  profileEditModal.classList.remove("modal_opened");
+});
+
+const buttonSave = profileEditModal.querySelector(".form__button");
+const profileEditForm = profileEditModal.querySelector(".form");
+const cardTemplate = document.querySelector("#card-template").content;
+const cardList = document.querySelector(".cards__list");
 
 function updateProfile(evt) {
   evt.preventDefault();
 
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputDescription.value;
+
+  profileEditModal.classList.remove("modal_opened");
 }
 profileEditForm.addEventListener("submit", updateProfile);
 
