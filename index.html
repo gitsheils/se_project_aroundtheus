@@ -71,12 +71,59 @@
         </div>
       </div>
 
+      <div class="modal cards-modal">
+        <div class="modal__container cards-modal__container">
+          <button
+            class="modal__button-close cards-modal__button-close"
+            type="button"
+          ></button>
+          <h2 class="modal__title cards-modal__title">New place</h2>
+          <form class="form cards-form">
+            <fieldset class="form__fieldset cards-form__fieldset">
+              <input
+                class="form__input cards-form__input"
+                type="text"
+                placeholder="Title"
+              />
+            </fieldset>
+
+            <fieldset class="form__fieldset cards-form__fieldset">
+              <input
+                class="form__input cards-form__input"
+                type="text"
+                placeholder="Image link"
+              />
+            </fieldset>
+            <button class="form__button cards-form__button" type="submit">
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card-modal">
+        <div class="card-modal__container">
+          <button class="card-modal__button-close" type="button"></button>
+          <img class="card-modal__image" src="./images/french.jpeg" />
+          <p class="card-modal__title">lake lagos</p>
+        </div>
+      </div>
+
+      <div class="card-modal">
+        <div class="card-modal__container">
+          <button class="card-modal__button-close" type="button"></button>
+          <img class="card-modal__image" src="" />
+          <p class="card-modal__title"></p>
+        </div>
+      </div>
+
       <template id="card-template">
         <li class="card">
+          <button class="card__button-delete" type="button"></button>
           <img class="card__image" src="" alt="" />
           <div class="card__description">
             <h2 class="card__title"></h2>
-            <button class="card__button" type="button"></button>
+            <button class="card__button-like" type="button"></button>
           </div>
         </li>
       </template>

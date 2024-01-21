@@ -1,12 +1,29 @@
 .card {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.card__button-delete {
+  width: 18px;
+  height: 19px;
+  cursor: pointer;
+  background: url("../images/Trash.svg") transparent center no-repeat;
+  border: none;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
+.card__button-delete:hover {
+  opacity: 0.6;
 }
 
 .card__image {
   width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .card__description {
@@ -32,14 +49,16 @@
   overflow: hidden;
 }
 
-.card__button {
+.card__button-like {
   background: transparent center no-repeat url(../images/Group.svg);
   width: 21px;
   height: 18px;
   border-style: none;
 }
-
-.card__button:hover {
+.card__button-like_active {
+  background: transparent center no-repeat url(../images/Union.svg);
+}
+.card__button-like:hover {
   opacity: 0.5;
   cursor: pointer;
 }

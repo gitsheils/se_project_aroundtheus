@@ -72,9 +72,63 @@ function getCardElement(data) {
   cardImage.setAttribute("alt", data.name);
   cardTitle.textContent = data.name;
 
+  const cardModal = document.querySelector(".card-modal");
+  const buttonCloseCard = document.querySelector(".card-modal__button-close");
+
+  cardImage.addEventListener("click", () => {
+    const cardModalImage = document.querySelector(".card-modal__image");
+    const cardModalTitle = document.querySelector(".card-modal__title");
+    cardModalImage.src = data.link;
+    cardModalTitle.textContent = data.name;
+    cardModal.classList.add("card-modal_opened");
+  });
+
+  buttonCloseCard.addEventListener("click", () => {
+    cardModal.classList.remove("card-modal_opened");
+  });
+
+  const buttonLike = cardElement.querySelector(".card__button-like");
+  buttonLike.addEventListener("click", () => {
+    buttonLike.classList.toggle("card__button-like_active");
+  });
+
+  const buttonTrash = cardElement.querySelector(".card__button-delete");
+  buttonTrash.addEventListener("click", () => {
+    const card = buttonTrash.closest(".card");
+    card.remove();
+  });
+
   return cardElement;
 }
 initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
   cardList.append(cardElement);
 });
+
+const cardsModal = document.querySelector(".cards-modal");
+const cardsButtonAdd = document.querySelector(".profile__add-button");
+const cardsButtonClose = document.querySelector(".cards-modal__button-close");
+
+cardsButtonAdd.addEventListener("click", () => {
+  cardsModal.classList.add("cards-modal_opened");
+});
+cardsButtonClose.addEventListener("click", () => {
+  cardsModal.classList.remove("cards-modal_opened");
+});
+
+const cardsInput = document.querySelectorAll(".cards-form__input");
+const cardsInputTitle = cardsInput[0];
+const cardsInputLink = cardsInput[1];
+
+const cardsEditForm = document.querySelector(".cards-form");
+cardsEditForm.addEventListener("submit", updateCards);
+
+function updateCards(evt) {
+  evt.preventDefault();
+  const name = cardsInputTitle.value;
+  const link = cardsInputLink.value;
+  const cardElement = getCardElement({ name, link });
+  console.log(cardElement);
+  cardList.prepend(cardElement);
+  cardsModal.classList.remove("cards-modal_opened");
+}
