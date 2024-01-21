@@ -50,12 +50,10 @@
   }
 
   .form__fieldset {
-    max-width: 238px;
     min-height: 27px;
   }
 
   .form__button {
-    max-width: 238px;
     width: 100%;
     min-height: 46px;
     margin: 15px 0 25px;

@@ -26,13 +26,17 @@ const initialCards = [
   },
 ];
 
-const buttonEdit = document.querySelector(".profile__edit-button");
-const profileEditModal = document.querySelector(".modal");
-const buttonClose = document.querySelector(".modal__button-close");
+const profileButtonEdit = document.querySelector(".profile__edit-button");
+const profileEditModal = document.querySelector(".profile-modal");
+const profileButtonClose = profileEditModal.querySelector(
+  ".profile-modal__button-close"
+);
 
-const input = profileEditModal.querySelectorAll(".form__input");
-const inputName = input[0];
-const inputDescription = input[1];
+const inputName = profileEditModal.querySelector(".form__input-name");
+const inputDescription = profileEditModal.querySelector(
+  ".form__input-description"
+);
+
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 function fillProfileForm() {
@@ -40,12 +44,20 @@ function fillProfileForm() {
   inputDescription.value = profileSubtitle.textContent;
 }
 
-buttonEdit.addEventListener("click", () => {
+//add functions for open and close modal
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+}
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+}
+
+profileButtonEdit.addEventListener("click", () => {
   fillProfileForm();
-  profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
-buttonClose.addEventListener("click", () => {
-  profileEditModal.classList.remove("modal_opened");
+profileButtonClose.addEventListener("click", () => {
+  closeModal(profileEditModal);
 });
 
 const buttonSave = profileEditModal.querySelector(".form__button");
@@ -59,7 +71,7 @@ function updateProfile(evt) {
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputDescription.value;
 
-  profileEditModal.classList.remove("modal_opened");
+  closeModal(profileEditModal);
 }
 profileEditForm.addEventListener("submit", updateProfile);
 
@@ -73,18 +85,18 @@ function getCardElement(data) {
   cardTitle.textContent = data.name;
 
   const cardModal = document.querySelector(".card-modal");
-  const buttonCloseCard = document.querySelector(".card-modal__button-close");
+  const cardButtonClose = document.querySelector(".card-modal__button-close");
 
   cardImage.addEventListener("click", () => {
     const cardModalImage = document.querySelector(".card-modal__image");
     const cardModalTitle = document.querySelector(".card-modal__title");
     cardModalImage.src = data.link;
     cardModalTitle.textContent = data.name;
-    cardModal.classList.add("card-modal_opened");
+    openModal(cardModal);
   });
 
-  buttonCloseCard.addEventListener("click", () => {
-    cardModal.classList.remove("card-modal_opened");
+  cardButtonClose.addEventListener("click", () => {
+    closeModal(cardModal);
   });
 
   const buttonLike = cardElement.querySelector(".card__button-like");
@@ -107,18 +119,17 @@ initialCards.forEach((data) => {
 
 const cardsModal = document.querySelector(".cards-modal");
 const cardsButtonAdd = document.querySelector(".profile__add-button");
-const cardsButtonClose = document.querySelector(".cards-modal__button-close");
+const cardsButtonClose = cardsModal.querySelector(".cards-modal__button-close");
 
 cardsButtonAdd.addEventListener("click", () => {
-  cardsModal.classList.add("cards-modal_opened");
+  openModal(cardsModal);
 });
 cardsButtonClose.addEventListener("click", () => {
-  cardsModal.classList.remove("cards-modal_opened");
+  closeModal(cardsModal);
 });
 
-const cardsInput = document.querySelectorAll(".cards-form__input");
-const cardsInputTitle = cardsInput[0];
-const cardsInputLink = cardsInput[1];
+const cardsInputTitle = cardsModal.querySelector(".form__input-title");
+const cardsInputLink = cardsModal.querySelector(".form__input-link");
 
 const cardsEditForm = document.querySelector(".cards-form");
 cardsEditForm.addEventListener("submit", updateCards);
@@ -128,7 +139,7 @@ function updateCards(evt) {
   const name = cardsInputTitle.value;
   const link = cardsInputLink.value;
   const cardElement = getCardElement({ name, link });
-  console.log(cardElement);
   cardList.prepend(cardElement);
-  cardsModal.classList.remove("cards-modal_opened");
+  closeModal(cardsModal);
+  cardsEditForm.reset();
 }

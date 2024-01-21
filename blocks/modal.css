@@ -1,4 +1,4 @@
-.modal {
+.profile-modal {
   display: none;
   width: 100%;
   height: 100%;
@@ -11,7 +11,7 @@
   display: block;
 }
 
-.modal__container {
+.profile-modal__container {
   background-color: white;
   color: black;
   max-width: 430px;
@@ -24,7 +24,7 @@
   border-radius: 10px;
 }
 
-.modal__button-close {
+.profile-modal__button-close {
   width: 40px;
   height: 40px;
   position: fixed;
@@ -35,11 +35,11 @@
   border: none;
 }
 
-.modal__button-close:hover {
+.profile-modal__button-close:hover {
   opacity: 0.6;
 }
 
-.modal__title {
+.profile-modal__title {
   max-width: 330px;
   width: 100%;
   min-height: 23px;
@@ -50,12 +50,12 @@
 }
 
 @media screen and (max-width: 320px) {
-  .modal__container {
+  .profile-modal__container {
     max-width: 282px;
     min-height: 322px;
   }
 
-  .modal__button-close {
+  .profile-modal__button-close {
     width: 26px;
     height: 26px;
 
@@ -63,7 +63,7 @@
     right: 0;
   }
 
-  .modal__title {
+  .profile-modal__title {
     max-width: 238px;
     width: 100%;
     min-height: 22px;
