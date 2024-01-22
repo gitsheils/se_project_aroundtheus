@@ -27,9 +27,9 @@ const initialCards = [
 ];
 
 const profileButtonEdit = document.querySelector(".profile__edit-button");
-const profileEditModal = document.querySelector(".profile-modal");
+const profileEditModal = document.querySelector("#profile-modal");
 const profileButtonClose = profileEditModal.querySelector(
-  ".profile-modal__button-close"
+  ".modal__button-close"
 );
 
 const inputName = profileEditModal.querySelector(".form__input-name");
@@ -44,7 +44,6 @@ function fillProfileForm() {
   inputDescription.value = profileSubtitle.textContent;
 }
 
-//add functions for open and close modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -75,6 +74,9 @@ function updateProfile(evt) {
 }
 profileEditForm.addEventListener("submit", updateProfile);
 
+const cardModal = document.querySelector("#card-modal");
+const cardButtonClose = cardModal.querySelector(".modal__button-close");
+
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
@@ -84,19 +86,12 @@ function getCardElement(data) {
   cardImage.setAttribute("alt", data.name);
   cardTitle.textContent = data.name;
 
-  const cardModal = document.querySelector(".card-modal");
-  const cardButtonClose = document.querySelector(".card-modal__button-close");
-
   cardImage.addEventListener("click", () => {
-    const cardModalImage = document.querySelector(".card-modal__image");
-    const cardModalTitle = document.querySelector(".card-modal__title");
+    const cardModalImage = document.querySelector(".modal__image");
+    const cardModalTitle = document.querySelector(".modal__card-title");
     cardModalImage.src = data.link;
     cardModalTitle.textContent = data.name;
     openModal(cardModal);
-  });
-
-  cardButtonClose.addEventListener("click", () => {
-    closeModal(cardModal);
   });
 
   const buttonLike = cardElement.querySelector(".card__button-like");
@@ -117,9 +112,9 @@ initialCards.forEach((data) => {
   cardList.append(cardElement);
 });
 
-const cardsModal = document.querySelector(".cards-modal");
+const cardsModal = document.querySelector("#cards-modal");
 const cardsButtonAdd = document.querySelector(".profile__add-button");
-const cardsButtonClose = cardsModal.querySelector(".cards-modal__button-close");
+const cardsButtonClose = cardsModal.querySelector(".modal__button-close");
 
 cardsButtonAdd.addEventListener("click", () => {
   openModal(cardsModal);
@@ -143,3 +138,6 @@ function updateCards(evt) {
   closeModal(cardsModal);
   cardsEditForm.reset();
 }
+cardButtonClose.addEventListener("click", () => {
+  closeModal(cardModal);
+});
