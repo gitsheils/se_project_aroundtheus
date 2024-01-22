@@ -89,7 +89,9 @@ function getCardElement(data) {
   cardImage.addEventListener("click", () => {
     const cardModalImage = document.querySelector(".modal__image");
     const cardModalTitle = document.querySelector(".modal__card-title");
+    cardModalImage.alt = `photo of ${data.name}`;
     cardModalImage.src = data.link;
+
     cardModalTitle.textContent = data.name;
     openModal(cardModal);
   });
@@ -126,7 +128,7 @@ cardsButtonClose.addEventListener("click", () => {
 const cardsInputTitle = cardsModal.querySelector(".form__input-title");
 const cardsInputLink = cardsModal.querySelector(".form__input-link");
 
-const cardsEditForm = document.querySelector(".cards-form");
+const cardsEditForm = document.querySelector("#cards-form");
 cardsEditForm.addEventListener("submit", updateCards);
 
 function updateCards(evt) {
