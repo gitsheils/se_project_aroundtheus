@@ -25,6 +25,24 @@
   line-height: 14px;
 }
 
+.form__input-error {
+  display: none;
+}
+
+.form__input_type_error {
+  display: block;
+  border-bottom: 1px solid red;
+}
+
+.form__input-error_active {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  color: red;
+  margin: 5px 0;
+}
+
 .form__button {
   width: 100%;
   margin: 0;
@@ -41,6 +59,13 @@
 .form__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.button_inactive {
+  color: black;
+  border: 1px solid black;
+  background-color: white;
+  opacity: 0.2;
 }
 @media screen and (max-width: 320px) {
   .form {

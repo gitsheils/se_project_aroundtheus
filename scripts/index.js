@@ -31,14 +31,13 @@ const profileEditModal = document.querySelector("#profile-modal");
 const profileButtonClose = profileEditModal.querySelector(
   ".modal__button-close"
 );
-
 const inputName = profileEditModal.querySelector(".form__input-name");
 const inputDescription = profileEditModal.querySelector(
   ".form__input-description"
 );
-
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
+
 function fillProfileForm() {
   inputName.value = profileTitle.textContent;
   inputDescription.value = profileSubtitle.textContent;
@@ -46,6 +45,8 @@ function fillProfileForm() {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  closeByOverlay(modal);
+  closeByEsc(modal);
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
@@ -143,3 +144,19 @@ function updateCards(evt) {
 cardButtonClose.addEventListener("click", () => {
   closeModal(cardModal);
 });
+
+function closeByOverlay(modalType) {
+  modalType.addEventListener("click", function () {
+    modalType.classList.remove("modal_opened");
+  });
+  const container = modalType.querySelector(".modal__container");
+  container.addEventListener("click", (evt) => evt.stopPropagation());
+}
+
+function closeByEsc(modalType) {
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      modalType.classList.remove("modal_opened");
+    }
+  });
+}
