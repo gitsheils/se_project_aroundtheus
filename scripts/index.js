@@ -45,8 +45,13 @@ function fillProfileForm() {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  closeByOverlay(modal);
-  closeByEsc(modal);
+
+  document.addEventListener("keydown", function closeByEsc(evt) {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+      document.removeEventListener("keydown", closeByEsc);
+    }
+  });
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
@@ -145,18 +150,11 @@ cardButtonClose.addEventListener("click", () => {
   closeModal(cardModal);
 });
 
-function closeByOverlay(modalType) {
-  modalType.addEventListener("click", function () {
-    modalType.classList.remove("modal_opened");
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", () => {
+    closeModal(modal);
   });
-  const container = modalType.querySelector(".modal__container");
-  container.addEventListener("click", (evt) => evt.stopPropagation());
-}
-
-function closeByEsc(modalType) {
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      modalType.classList.remove("modal_opened");
-    }
-  });
-}
+  const container = modal.querySelector(".modal__container");
+  container.addEventListener("mousedown", (evt) => evt.stopPropagation());
+});
