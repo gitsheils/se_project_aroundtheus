@@ -43,18 +43,22 @@ function fillProfileForm() {
   inputDescription.value = profileSubtitle.textContent;
 }
 
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
+    closeModal(modal);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  document.addEventListener("keydown", function closeByEsc(evt) {
-    if (evt.key === "Escape") {
-      closeModal(modal);
-      document.removeEventListener("keydown", closeByEsc);
-    }
-  });
+  document.addEventListener("keydown", closeByEsc);
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+
+  document.removeEventListener("keydown", closeByEsc);
 }
 
 profileButtonEdit.addEventListener("click", () => {
