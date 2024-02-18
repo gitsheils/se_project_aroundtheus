@@ -96,40 +96,10 @@ profileEditForm.addEventListener("submit", updateProfile);
 const cardModal = document.querySelector("#card-modal");
 const cardButtonClose = cardModal.querySelector(".modal__button-close");
 
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-
-  cardImage.setAttribute("src", data.link);
-  cardImage.setAttribute("alt", data.name);
-  cardTitle.textContent = data.name;
-
-  cardImage.addEventListener("click", () => {
-    const cardModalImage = document.querySelector(".modal__image");
-    const cardModalTitle = document.querySelector(".modal__card-title");
-    cardModalImage.alt = `photo of ${data.name}`;
-    cardModalImage.src = data.link;
-
-    cardModalTitle.textContent = data.name;
-    openModal(cardModal);
-  });
-
-  const buttonLike = cardElement.querySelector(".card__button-like");
-  buttonLike.addEventListener("click", () => {
-    buttonLike.classList.toggle("card__button-like_active");
-  });
-
-  const buttonTrash = cardElement.querySelector(".card__button-delete");
-  buttonTrash.addEventListener("click", () => {
-    const card = buttonTrash.closest(".card");
-    card.remove();
-  });
-
-  return cardElement;
-}
 initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
+  const card = new Card(data, "#card-template", handleImageClick);
+  const cardElement = card.generateCard();
+
   cardList.append(cardElement);
 });
 
@@ -150,6 +120,8 @@ const cardsInputLink = cardsModal.querySelector(".form__input-link");
 const cardsEditForm = document.querySelector("#cards-form");
 cardsEditForm.addEventListener("submit", updateCards);
 
+const modalCard = document.querySelector("#card-modal");
+
 function handleImageClick() {
   const cardModalImage = modalCard.querySelector(".modal__image");
   const cardModalTitle = modalCard.querySelector(".modal__card-title");
@@ -158,7 +130,7 @@ function handleImageClick() {
   cardModalImage.alt = `photo of ${this._name}`;
   cardModalTitle.textContent = this._name;
 
-  openModal("#card-modal");
+  openModal(modalCard);
 }
 
 function updateCards(evt) {
