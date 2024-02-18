@@ -95,6 +95,13 @@ function closeByEsc(evt) {
 
 function openModal(modalID) {
   const modal = document.querySelector(modalID);
+
+  if (modalID == "#cards-modal") {
+    const modalSubmitButton = modal.querySelector(".form__button");
+    modalSubmitButton.classList.add("button_inactive");
+    modalSubmitButton.setAttribute("disabled", true);
+  }
+
   modal.classList.add("modal_opened");
 }
 function closeModal(modalID) {
@@ -128,6 +135,7 @@ function updateCards(evt) {
   cardList.prepend(cardElement);
 
   closeModal("#cards-modal");
+  cardsEditForm.reset();
 }
 cardsEditForm.addEventListener("submit", updateCards);
 
