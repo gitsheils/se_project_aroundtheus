@@ -56,12 +56,6 @@ function closeByEsc(evt) {
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  if (modal == cardsModal) {
-    const modalSubmitButton = modal.querySelector(".form__button");
-    modalSubmitButton.classList.add("button_inactive");
-    modalSubmitButton.setAttribute("disabled", true);
-  }
-
   document.addEventListener("keydown", closeByEsc);
 }
 function closeModal(modal) {
