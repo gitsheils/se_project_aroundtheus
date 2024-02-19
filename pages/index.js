@@ -81,6 +81,7 @@ function updateProfile(evt) {
   profileSubtitle.textContent = inputDescription.value;
 
   closeModal(profileEditModal);
+  profileEditForm.reset();
 }
 profileEditForm.addEventListener("submit", updateProfile);
 
