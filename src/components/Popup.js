@@ -1,29 +1,32 @@
-import { openModal, closeModal, closeByEsc } from "../utils/utils.js";
 export default class Popup {
-  constructor(popupSelector) {
-    this.popup = popupSelector;
+  constructor(popup) {
+    this.popup = popup;
   }
   open() {
-    openModal(this.popup);
-    this._handleEscClose();
+    this.popup.classList.add("modal_opened");
+    document.addEventListener("keydown", this._handleEscClose);
   }
   close() {
-    closeModal(this.popup);
+    this.popup.classList.remove("modal_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
   }
 
-  _handleEscClose() {
-    document.addEventListener("keydown", closeByEsc);
-  }
+  _handleEscClose = (evt) => {
+    if (evt.key === "Escape") {
+      const currentModal = document.querySelector(".modal_opened");
+      this.close();
+    }
+  };
   setEventListeners() {
     this.buttonClose = this.popup.querySelector(".modal__button-close");
     this.buttonClose.addEventListener("click", () => {
       this.close();
     });
 
-    this.popup.addEventListener("mousedown", () => {
-      this.close();
+    this.popup.addEventListener("mousedown", (evt) => {
+      if (evt.target === evt.currentTarget) {
+        this.close();
+      }
     });
-    const container = this.popup.querySelector(".modal__container");
-    container.addEventListener("mousedown", (evt) => evt.stopPropagation());
   }
 }

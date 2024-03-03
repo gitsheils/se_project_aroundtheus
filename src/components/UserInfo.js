@@ -1,17 +1,16 @@
-import { profileTitle, profileSubtitle } from "../utils/constants.js";
-
 export class UserInfo {
-  constructor(obj) {
-    this.name = obj.input1;
-    this.job = obj.input2;
+  constructor(name, job) {
+    this.name = name;
+    this.job = job;
   }
   getUserInfo() {
-    input1 = profileTitle.textContent;
-    input2 = profileSubtitle.textContent;
-    return { input1, input2 };
+    return {
+      name: this.name.textContent,
+      about: this.job.textContent,
+    };
   }
-  setUserInfo() {
-    profileTitle.textContent = this.name;
-    profileSubtitle.textContent = this.job;
+  setUserInfo({ name, about }) {
+    this.name.textContent = name;
+    this.job.textContent = about;
   }
 }

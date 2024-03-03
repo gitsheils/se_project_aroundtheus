@@ -9,13 +9,17 @@ import {
   config,
   profileEditForm,
   cardsEditForm,
+  profileTitle,
+  profileSubtitle,
+  modalCard,
 } from "../utils/constants.js";
-import { createCard, updateCards } from "../utils/utils.js";
+import { createCard } from "../utils/utils.js";
 import { UserInfo } from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 const cardsSection = new Section(
   {
@@ -28,11 +32,15 @@ const cardsSection = new Section(
   cardList
 );
 cardsSection.renderItems();
+//
+export const cardPopup = new PopupWithImage(modalCard);
+cardPopup.setEventListeners();
+
+const profileEddited = new UserInfo(profileTitle, profileSubtitle);
 
 const profilePopup = new PopupWithForm(profileEditModal, {
-  renderer: (obj) => {
-    const profileEditted = new UserInfo(obj);
-    profileEditted.setUserInfo();
+  handleFormSubmit: (obj) => {
+    profileEddited.setUserInfo(obj);
   },
 });
 profilePopup.setEventListeners();
@@ -41,8 +49,9 @@ profileButtonEdit.addEventListener("click", () => {
 });
 
 const cardsPopup = new PopupWithForm(cardsModal, {
-  renderer: (obj) => {
-    updateCards(obj);
+  handleFormSubmit: (obj) => {
+    const cardElement = createCard(obj);
+    cardsSection.addItem(cardElement);
   },
 });
 cardsPopup.setEventListeners();
