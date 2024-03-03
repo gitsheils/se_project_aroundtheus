@@ -56,16 +56,16 @@
   margin-bottom: 36px;
 }
 
-.form__button:hover {
+.form__button:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
 }
-
 .button_inactive {
   color: black;
   border: 1px solid black;
   background-color: white;
   opacity: 0.2;
+  cursor: default;
 }
 @media screen and (max-width: 320px) {
   .form {

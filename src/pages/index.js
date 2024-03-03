@@ -13,7 +13,7 @@ import {
   profileSubtitle,
   modalCard,
 } from "../utils/constants.js";
-import { createCard } from "../utils/utils.js";
+import { createCard, fillProfileForm } from "../utils/utils.js";
 import { UserInfo } from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -45,6 +45,7 @@ const profilePopup = new PopupWithForm(profileEditModal, {
 });
 profilePopup.setEventListeners();
 profileButtonEdit.addEventListener("click", () => {
+  fillProfileForm(profileEddited.getUserInfo());
   profilePopup.open();
 });
 

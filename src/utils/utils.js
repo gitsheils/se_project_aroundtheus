@@ -2,6 +2,12 @@ import Card from "../components/Card.js";
 
 import { cardPopup } from "../pages/index.js";
 
+import { inputName, inputDescription } from "./constants.js";
+export function fillProfileForm({ name, about }) {
+  inputName.value = name;
+  inputDescription.value = about;
+}
+
 export function handleImageClick(thisObj) {
   const title = thisObj.name;
   const link = thisObj.link;
