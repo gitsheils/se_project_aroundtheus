@@ -1,4 +1,7 @@
 import Popup from "../components/Popup.js";
+
+import { renderLoading } from "../utils/utils.js";
+
 export class PopupWithForm extends Popup {
   constructor(popup, { handleFormSubmit }) {
     super(popup);
@@ -8,6 +11,16 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     this.form.reset();
+    //
+
+    const errorMessages = this.form.querySelectorAll(".form__input-error");
+    errorMessages.forEach((errorMessage) => {
+      errorMessage.classList.remove("form__input-error_active");
+    });
+    const inputs = this.form.querySelectorAll(".form__input");
+    inputs.forEach((input) => {
+      input.classList.remove("form__input_type_error");
+    });
   }
   _getInputValues() {
     const inputList = this.form.querySelectorAll(".form__input");
@@ -23,9 +36,22 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
 
     this.form.addEventListener("submit", (evt) => {
+      //
+      renderLoading(true, this.form);
+
       evt.preventDefault();
 
       this.handleFormSubmit(this._getInputValues());
+      this.close();
+    });
+  }
+
+  //
+  setDeleteListener(cardElement, objId) {
+    super.setEventListeners();
+    this.form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      this.handleFormSubmit(cardElement, objId);
       this.close();
     });
   }

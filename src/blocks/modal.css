@@ -20,7 +20,7 @@
   color: black;
   max-width: 430px;
   width: 100%;
-  min-height: 330px;
+  /*min-height: 330px;*/
   position: fixed;
   top: 50%;
   left: 50%;
@@ -56,6 +56,10 @@
   font-size: 24px;
   line-height: 29px;
   margin: 34px 64px 54px 36px;
+}
+
+.modal__title_type_delete {
+  margin-bottom: 38px;
 }
 
 .modal__image {

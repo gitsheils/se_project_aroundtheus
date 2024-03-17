@@ -23,11 +23,16 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__image"
-            src="<%=require('./images/Avatar.jpg')%>"
-            alt="photo of Cousteau"
-          />
+          <div class="profile__image-container">
+            <img
+              class="profile__image"
+              src="<%=require('./images/Avatar.jpg')%>"
+              alt="photo of Cousteau"
+            />
+
+            <div class="profile__image-ed"></div>
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -135,6 +140,40 @@
           </div>
         </li>
       </template>
+
+      <div class="modal" id="propic-modal">
+        <div class="modal__container">
+          <button class="modal__button-close" type="button"></button>
+          <h2 class="modal__title">Change profile picture</h2>
+          <form class="form" id="propic-form" novalidate>
+            <fieldset class="form__fieldset">
+              <input
+                id="link-input"
+                name="link"
+                class="form__input form__input-link"
+                type="url"
+                placeholder="link"
+                required
+              />
+              <span class="form__input-error link-input-error"></span>
+            </fieldset>
+
+            <button class="form__button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" id="delete-modal">
+        <div class="modal__container">
+          <button class="modal__button-close" type="button"></button>
+          <h2 class="modal__title modal__title_type_delete">Are you sure?</h2>
+          <form class="form" id="delete-form" novalidate>
+            <button class="form__button form__button_type_delete" type="submit">
+              Yes
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
