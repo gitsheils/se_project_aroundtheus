@@ -115,6 +115,7 @@ export const deletePopup = new PopupWithForm(deleteModal, {
     cardElement.remove();
   },
 });
+deletePopup.setDeleteListener();
 
 const propicFormValidator = new FormValidator(config, propicForm);
 propicFormValidator.enableValidation();

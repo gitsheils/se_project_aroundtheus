@@ -47,12 +47,17 @@ export class PopupWithForm extends Popup {
   }
 
   //
-  setDeleteListener(cardElement, objId) {
+  setDeleteListener() {
     super.setEventListeners();
     this.form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.handleFormSubmit(cardElement, objId);
+      this.handleFormSubmit(this.cardElement, this.id);
       this.close();
     });
+  }
+
+  catchSelectedCard(cardElement, objId) {
+    this.cardElement = cardElement;
+    this.id = objId;
   }
 }

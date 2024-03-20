@@ -52,8 +52,8 @@ export default class Card {
     this.buttonTrash.addEventListener("click", () => {
       //added:
       deletePopup.open();
-      deletePopup.setDeleteListener(this._cardElement, this.id);
 
+      deletePopup.catchSelectedCard(this._cardElement, this.id);
       //this._handleTrashButton();
     });
   }
