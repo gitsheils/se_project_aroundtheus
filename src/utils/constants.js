@@ -32,8 +32,8 @@ export const config = {
 
 export const profileEditForm = profileEditModal.querySelector(".form");
 export const cardsEditForm = cardsModal.querySelector("#cards-form");
-
 export const propicForm = document.querySelector("#propic-form");
+export const deleteForm = document.querySelector("#delete-form");
 
 export const propicModal = document.querySelector("#propic-modal");
 export const propicButtonEdit = document.querySelector(".profile__image-ed");

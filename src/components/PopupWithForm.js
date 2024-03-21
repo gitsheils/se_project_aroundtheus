@@ -1,26 +1,19 @@
 import Popup from "../components/Popup.js";
 
-import { renderLoading } from "../utils/utils.js";
-
 export class PopupWithForm extends Popup {
-  constructor(popup, { handleFormSubmit }) {
+  constructor(popup, { handleFormSubmit, handleClearError, renderLoading }) {
     super(popup);
     this.handleFormSubmit = handleFormSubmit;
     this.form = this.popup.querySelector(".form");
+
+    this.handleClearError = handleClearError;
+    this._renderLoading = renderLoading;
   }
   close() {
     super.close();
     this.form.reset();
-    //
 
-    const errorMessages = this.form.querySelectorAll(".form__input-error");
-    errorMessages.forEach((errorMessage) => {
-      errorMessage.classList.remove("form__input-error_active");
-    });
-    const inputs = this.form.querySelectorAll(".form__input");
-    inputs.forEach((input) => {
-      input.classList.remove("form__input_type_error");
-    });
+    this.handleClearError();
   }
   _getInputValues() {
     const inputList = this.form.querySelectorAll(".form__input");
@@ -37,27 +30,13 @@ export class PopupWithForm extends Popup {
 
     this.form.addEventListener("submit", (evt) => {
       //
-      renderLoading(true, this.form);
+      //renderLoading(true, this.form);
+      this._renderLoading();
 
       evt.preventDefault();
 
       this.handleFormSubmit(this._getInputValues());
-      this.close();
+      //this.close();
     });
-  }
-
-  //
-  setDeleteListener() {
-    super.setEventListeners();
-    this.form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this.handleFormSubmit(this.cardElement, this.id);
-      this.close();
-    });
-  }
-
-  catchSelectedCard(cardElement, objId) {
-    this.cardElement = cardElement;
-    this.id = objId;
   }
 }

@@ -1,6 +1,6 @@
 import Card from "../components/Card.js";
 
-import { cardPopup } from "../pages/index.js";
+import { deletePopup, previewPopup, api } from "../pages/index.js";
 
 import { inputName, inputDescription } from "./constants.js";
 
@@ -13,11 +13,31 @@ export function handleImageClick(thisObj) {
   const title = thisObj.name;
   const link = thisObj.link;
 
-  cardPopup.open({ title, link });
+  previewPopup.open({ title, link });
 }
-
+/*
 export function createCard(item) {
   const card = new Card(item, "#card-template", handleImageClick);
+  return card.generateCard();
+}
+*/
+export function createCard(item) {
+  const card = new Card(item, "#card-template", handleImageClick, {
+    handleDelete: (cardElement, id) => {
+      deletePopup.open();
+      deletePopup.catchSelectedCard(cardElement, id);
+    },
+    handleLike: (id) => {
+      api.addLike(id).then((r) => {
+        card._handleLikeButton();
+      });
+    },
+    handleUnlike: (id) => {
+      api.deleteLike(id).then((r) => {
+        card._handleLikeButton();
+      });
+    },
+  });
   return card.generateCard();
 }
 
@@ -28,4 +48,11 @@ export function renderLoading(isLoading, form, text) {
   } else {
     subButton.textContent = text;
   }
+}
+
+export function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error ${res.status}`);
 }

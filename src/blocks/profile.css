@@ -30,7 +30,7 @@
   position: relative;
 }
 .profile__image-ed {
-  display: block;
+  display: none;
   background: transparent center no-repeat url(../images/Edit\ Button.svg);
   width: 26px;
   height: 26px;
@@ -42,6 +42,10 @@
 .profile__image-container:hover .profile__image {
   opacity: 0.4;
   cursor: pointer;
+}
+
+.profile__image-container:hover .profile__image-ed {
+  display: block;
 }
 
 .profile__title {
