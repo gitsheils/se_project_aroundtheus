@@ -8,9 +8,6 @@ export class PopupWithConfirmation extends Popup {
 
     this._renderLoading = renderLoading;
   }
-  close() {
-    super.close();
-  }
 
   setEventListener() {
     super.setEventListeners();

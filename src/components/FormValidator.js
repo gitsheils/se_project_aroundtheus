@@ -92,6 +92,11 @@ export default class FormValidator {
     });
     */
   }
+
+  resetSubmitButton() {
+    this.buttonElement.classList.add(this._inactiveButtonClass);
+    this.buttonElement.setAttribute("disabled", true);
+  }
 }
 
 const config = {

@@ -71,7 +71,7 @@ export default class Card {
       */
     });
   }
-  _handleLikeButton() {
+  handleLikeButton() {
     this.buttonLike.classList.toggle("card__button-like_active");
   }
   _handleTrashButton() {

@@ -29,12 +29,12 @@ export function createCard(item) {
     },
     handleLike: (id) => {
       api.addLike(id).then((r) => {
-        card._handleLikeButton();
+        card.handleLikeButton();
       });
     },
     handleUnlike: (id) => {
       api.deleteLike(id).then((r) => {
-        card._handleLikeButton();
+        card.handleLikeButton();
       });
     },
   });

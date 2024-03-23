@@ -61,6 +61,11 @@ const profilePopup = new PopupWithForm(profileEditModal, {
       .then((r) => {
         profilePopup.close();
         profileInfo.setUserInfo(r);
+
+        profileFormValidator.resetSubmitButton();
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         renderLoading(false, profileEditForm, "Save");
@@ -92,33 +97,21 @@ export const api = new Api(
   checkResponse
 );
 
-/*check:
 const newCardsSection = new Section(
   {
-    data: "",
     renderer: (item) => {
       const cardElement = createCard(item);
-      cardList.append(cardElement);
+      newCardsSection.addItem(cardElement);
     },
   },
   cardList
 );
-*/
 api
   .returnUserInfoAndCards()
   .then((res) => {
     profileInfo.setUserInfo(res[0]);
 
-    const newCardsSection = new Section(
-      {
-        data: res[1],
-        renderer: (item) => {
-          const cardElement = createCard(item);
-          cardList.append(cardElement);
-        },
-      },
-      cardList
-    );
+    newCardsSection.setItems(res[1].toReversed());
     newCardsSection.renderItems();
   })
   .catch((err) => console.error(err));
@@ -131,8 +124,11 @@ const avatarPopup = new PopupWithForm(
         .updateProPic(obj.link)
         .then((r) => {
           avatarPopup.close();
-          propic.src = obj.link;
+          profileInfo.setUserInfo(r);
+
+          propicFormValidator.resetSubmitButton();
         })
+        .catch((err) => console.error(err))
         .finally(() => {
           renderLoading(false, propicForm, "Save");
         });
@@ -160,6 +156,7 @@ export const deletePopup = new PopupWithConfirmation(deleteModal, {
         cardElement.remove();
         deletePopup.close();
       })
+      .catch((err) => console.error(err))
       .finally(() => {
         renderLoading(false, deleteForm, "Yes");
       });
@@ -178,23 +175,13 @@ const cardsPopup = new PopupWithForm(
         .addNewCard(obj)
         .then((r) => {
           cardsPopup.close();
-          /*
-      const cardElement = createCard(r);
-      cardList.prepend(cardElement);
-      */
-          const addedCS = new Section(
-            {
-              data: [r],
-              renderer: (item) => {
-                const cardElement = createCard(item);
 
-                cardList.prepend(cardElement);
-              },
-            },
-            cardList
-          );
-          addedCS.renderItems();
+          newCardsSection.setItems([r]);
+          newCardsSection.renderItems();
+
+          cardsFormValidator.resetSubmitButton();
         })
+        .catch((err) => console.error(err))
         .finally(() => {
           renderLoading(false, cardsEditForm, "Create");
         });
