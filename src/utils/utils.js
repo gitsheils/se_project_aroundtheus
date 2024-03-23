@@ -28,14 +28,20 @@ export function createCard(item) {
       deletePopup.catchSelectedCard(cardElement, id);
     },
     handleLike: (id) => {
-      api.addLike(id).then((r) => {
-        card.handleLikeButton();
-      });
+      api
+        .addLike(id)
+        .then((r) => {
+          card.handleLikeButton();
+        })
+        .catch((err) => console.log(err));
     },
     handleUnlike: (id) => {
-      api.deleteLike(id).then((r) => {
-        card.handleLikeButton();
-      });
+      api
+        .deleteLike(id)
+        .then((r) => {
+          card.handleLikeButton();
+        })
+        .catch((err) => console.log(err));
     },
   });
   return card.generateCard();
