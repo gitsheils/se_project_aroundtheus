@@ -1,31 +1,3 @@
-export const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
 export const cardList = document.querySelector(".cards__list");
 
 export const modalCard = document.querySelector("#card-modal");
@@ -60,3 +32,10 @@ export const config = {
 
 export const profileEditForm = profileEditModal.querySelector(".form");
 export const cardsEditForm = cardsModal.querySelector("#cards-form");
+export const propicForm = document.querySelector("#propic-form");
+export const deleteForm = document.querySelector("#delete-form");
+
+export const propicModal = document.querySelector("#propic-modal");
+export const propicButtonEdit = document.querySelector(".profile__image-ed");
+export const propic = document.querySelector(".profile__image");
+export const deleteModal = document.querySelector("#delete-modal");

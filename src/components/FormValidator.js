@@ -7,6 +7,9 @@ export default class FormValidator {
     this._errorClass = configObj.errorClass;
 
     this._form = formElement;
+
+    this._errorMessages = this._form.querySelectorAll(".form__input-error");
+    this._inputs = this._form.querySelectorAll(".form__input");
   }
 
   showInputError(inputElement, errorMessage) {
@@ -69,6 +72,30 @@ export default class FormValidator {
       this.toggleButtonState();
     });
     this.setEventListeners();
+  }
+
+  clearError() {
+    this._errorMessages.forEach((errorMessage) => {
+      errorMessage.classList.remove("form__input-error_active");
+    });
+    this._inputs.forEach((input) => {
+      input.classList.remove("form__input_type_error");
+    });
+    /*
+    const errorMessages = this.form.querySelectorAll(".form__input-error");
+    errorMessages.forEach((errorMessage) => {
+      errorMessage.classList.remove("form__input-error_active");
+    });
+    const inputs = this.form.querySelectorAll(".form__input");
+    inputs.forEach((input) => {
+      input.classList.remove("form__input_type_error");
+    });
+    */
+  }
+
+  resetSubmitButton() {
+    this.buttonElement.classList.add(this._inactiveButtonClass);
+    this.buttonElement.setAttribute("disabled", true);
   }
 }
 

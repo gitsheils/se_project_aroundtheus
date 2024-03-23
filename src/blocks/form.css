@@ -56,6 +56,10 @@
   margin-bottom: 36px;
 }
 
+.form__button_type_delete {
+  margin-top: 0;
+}
+
 .form__button:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
