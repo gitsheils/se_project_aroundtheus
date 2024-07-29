@@ -13,7 +13,6 @@ export default class Popup {
 
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
-      const currentModal = document.querySelector(".modal_opened");
       this.close();
     }
   };

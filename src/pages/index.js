@@ -1,19 +1,31 @@
 import "./index.css";
 import {
-  initialCards,
   cardList,
-  profileButtonEdit,
-  profileEditModal,
-  cardsButtonAdd,
-  cardsModal,
+  modalProfileEdit,
+  modalPropic,
+  modalCards,
+  modalCard,
+  modalDelete,
+  formProfile,
+  formPropic,
+  formCards,
+  formDelete,
+  buttonEditProfile,
+  buttonEditPropic,
+  buttonAddCard,
   config,
-  profileEditForm,
-  cardsEditForm,
   profileTitle,
   profileSubtitle,
-  modalCard,
+  propic,
+  cardModalImage,
+  cardModalTitle,
 } from "../utils/constants.js";
-import { createCard, fillProfileForm } from "../utils/utils.js";
+import {
+  createCard,
+  fillProfileForm,
+  renderLoading,
+  checkResponse,
+} from "../utils/utils.js";
 import { UserInfo } from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -21,47 +33,159 @@ import Section from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 
-const cardsSection = new Section(
+import { Api } from "../components/Api.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
+//
+
+export const api = new Api(
   {
-    data: initialCards,
+    baseUrl: "https://around-api.en.tripleten-services.com/v1",
+    headers: {
+      authorization: "f01264e8-2101-4ab7-b120-b09b55e63681",
+      "Content-Type": "application/json",
+    },
+  },
+  checkResponse
+);
+const profileInfo = new UserInfo(profileTitle, profileSubtitle, propic);
+
+const newCardsSection = new Section(
+  {
     renderer: (item) => {
       const cardElement = createCard(item);
-      cardsSection.addItem(cardElement);
+      newCardsSection.addItem(cardElement);
     },
   },
   cardList
 );
-cardsSection.renderItems();
+api
+  .returnUserInfoAndCards()
+  .then((res) => {
+    profileInfo.setUserInfo(res[0]);
+    newCardsSection.setItems(res[1].toReversed());
+    newCardsSection.renderItems();
+  })
+  .catch((err) => console.error(err));
+
 //
-export const cardPopup = new PopupWithImage(modalCard);
-cardPopup.setEventListeners();
+const profileFormValidator = new FormValidator(config, formProfile);
+profileFormValidator.enableValidation();
+const propicFormValidator = new FormValidator(config, formPropic);
+propicFormValidator.enableValidation();
+const cardsFormValidator = new FormValidator(config, formCards);
+cardsFormValidator.enableValidation();
 
-const profileEddited = new UserInfo(profileTitle, profileSubtitle);
-
-const profilePopup = new PopupWithForm(profileEditModal, {
+const profilePopup = new PopupWithForm(modalProfileEdit, {
   handleFormSubmit: (obj) => {
-    profileEddited.setUserInfo(obj);
+    api
+      .editProfile(obj)
+      .then((r) => {
+        profilePopup.close();
+        profileInfo.setUserInfo(r);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        renderLoading(false, formProfile, "Save");
+      });
+  },
+  handleClearError: () => {
+    profileFormValidator.resetForm();
+  },
+  renderLoading: () => {
+    renderLoading(true, formProfile);
   },
 });
 profilePopup.setEventListeners();
-profileButtonEdit.addEventListener("click", () => {
-  fillProfileForm(profileEddited.getUserInfo());
+
+const avatarPopup = new PopupWithForm(
+  modalPropic,
+  {
+    handleFormSubmit: (obj) => {
+      api
+        .updateProPic(obj.link)
+        .then((r) => {
+          avatarPopup.close();
+          profileInfo.setUserInfo(r);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          renderLoading(false, formPropic, "Save");
+        });
+    },
+    handleClearError: () => {
+      propicFormValidator.resetForm();
+    },
+    renderLoading: () => {
+      renderLoading(true, formPropic);
+    },
+  },
+  propicFormValidator
+);
+avatarPopup.setEventListeners();
+
+const cardsPopup = new PopupWithForm(
+  modalCards,
+  {
+    handleFormSubmit: (obj) => {
+      api
+        .addNewCard(obj)
+        .then((r) => {
+          cardsPopup.close();
+
+          newCardsSection.setItems([r]);
+          newCardsSection.renderItems();
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          renderLoading(false, formCards, "Create");
+        });
+    },
+    handleClearError: () => {
+      cardsFormValidator.resetForm();
+    },
+    renderLoading: () => {
+      renderLoading(true, formCards);
+    },
+  },
+  cardsFormValidator
+);
+cardsPopup.setEventListeners();
+
+buttonEditProfile.addEventListener("click", () => {
+  fillProfileForm(profileInfo.getUserInfo());
   profilePopup.open();
 });
-
-const cardsPopup = new PopupWithForm(cardsModal, {
-  handleFormSubmit: (obj) => {
-    const cardElement = createCard(obj);
-    cardsSection.addItem(cardElement);
-  },
+buttonEditPropic.addEventListener("click", () => {
+  avatarPopup.open();
 });
-cardsPopup.setEventListeners();
-cardsButtonAdd.addEventListener("click", () => {
+buttonAddCard.addEventListener("click", () => {
   cardsPopup.open();
 });
 
-const profileFormValidator = new FormValidator(config, profileEditForm);
-profileFormValidator.enableValidation();
+export const previewPopup = new PopupWithImage(
+  modalCard,
+  cardModalImage,
+  cardModalTitle
+);
+previewPopup.setEventListeners();
 
-const cardsFormValidator = new FormValidator(config, cardsEditForm);
-cardsFormValidator.enableValidation();
+export const deletePopup = new PopupWithConfirmation(modalDelete, {
+  handleFormSubmit: (cardElement, objId) => {
+    api
+      .deleteCard(objId)
+      .then((r) => {
+        cardElement.remove();
+        deletePopup.close();
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        renderLoading(false, formDelete, "Yes");
+      });
+  },
+  renderLoading: () => {
+    renderLoading(true, formDelete);
+  },
+});
+deletePopup.setEventListener();

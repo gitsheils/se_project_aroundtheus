@@ -1,62 +1,41 @@
-export const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
 export const cardList = document.querySelector(".cards__list");
 
+export const modalProfileEdit = document.querySelector("#profile-modal");
+export const modalPropic = document.querySelector("#propic-modal");
+export const modalCards = document.querySelector("#cards-modal");
 export const modalCard = document.querySelector("#card-modal");
-export const cardModalImage = modalCard.querySelector(".modal__image");
-export const cardModalTitle = modalCard.querySelector(".modal__card-title");
+export const modalDelete = document.querySelector("#delete-modal");
 
-export const profileButtonEdit = document.querySelector(
-  ".profile__edit-button"
-);
-export const profileEditModal = document.querySelector("#profile-modal");
-export const cardsButtonAdd = document.querySelector(".profile__add-button");
-export const cardsModal = document.querySelector("#cards-modal");
-
-export const profileTitle = document.querySelector(".profile__title");
-export const profileSubtitle = document.querySelector(".profile__subtitle");
-
-export const inputName = profileEditModal.querySelector(".form__input-name");
-export const inputDescription = profileEditModal.querySelector(
+export const inputName = modalProfileEdit.querySelector(".form__input-name");
+export const inputDescription = modalProfileEdit.querySelector(
   ".form__input-description"
 );
 
-export const cardsInputTitle = cardsModal.querySelector(".form__input-title");
-export const cardsInputLink = cardsModal.querySelector(".form__input-link");
+export const formProfile = modalProfileEdit.querySelector(".form");
+export const formPropic = document.querySelector("#propic-form");
+export const formCards = modalCards.querySelector("#cards-form");
+export const formDelete = document.querySelector("#delete-form");
+
+export const buttonEditProfile = document.querySelector(
+  ".profile__edit-button"
+);
+export const buttonEditPropic = document.querySelector(".profile__image-ed");
+export const buttonAddCard = document.querySelector(".profile__add-button");
+
+export const cardsInputTitle = modalCards.querySelector(".form__input-title");
+export const cardsInputLink = modalCards.querySelector(".form__input-link");
+
+export const cardModalImage = modalCard.querySelector(".modal__image");
+export const cardModalTitle = modalCard.querySelector(".modal__card-title");
+
+export const profileTitle = document.querySelector(".profile__title");
+export const profileSubtitle = document.querySelector(".profile__subtitle");
+export const propic = document.querySelector(".profile__image");
 
 export const config = {
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
+  inputClass: ".form__input",
+  submitButtonClass: ".form__button",
   inactiveButtonClass: "button_inactive",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
 };
-
-export const profileEditForm = profileEditModal.querySelector(".form");
-export const cardsEditForm = cardsModal.querySelector("#cards-form");
