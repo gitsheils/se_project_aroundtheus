@@ -1,22 +1,22 @@
 import "./index.css";
 import {
   cardList,
-  profileButtonEdit,
-  profileEditModal,
-  cardsButtonAdd,
-  cardsModal,
+  modalProfileEdit,
+  modalPropic,
+  modalCards,
+  modalCard,
+  modalDelete,
+  formProfile,
+  formPropic,
+  formCards,
+  formDelete,
+  buttonEditProfile,
+  buttonEditPropic,
+  buttonAddCard,
   config,
-  profileEditForm,
-  cardsEditForm,
   profileTitle,
   profileSubtitle,
-  modalCard,
-  propicForm,
-  propicModal,
-  propicButtonEdit,
   propic,
-  deleteModal,
-  deleteForm,
   cardModalImage,
   cardModalTitle,
 } from "../utils/constants.js";
@@ -36,55 +36,6 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Api } from "../components/Api.js";
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 //
-export const previewPopup = new PopupWithImage(
-  modalCard,
-  cardModalImage,
-  cardModalTitle
-);
-previewPopup.setEventListeners();
-
-const profileInfo = new UserInfo(profileTitle, profileSubtitle, propic);
-
-const profileFormValidator = new FormValidator(config, profileEditForm);
-profileFormValidator.enableValidation();
-
-const cardsFormValidator = new FormValidator(config, cardsEditForm);
-cardsFormValidator.enableValidation();
-
-const propicFormValidator = new FormValidator(config, propicForm);
-propicFormValidator.enableValidation();
-
-const profilePopup = new PopupWithForm(profileEditModal, {
-  handleFormSubmit: (obj) => {
-    api
-      .editProfile(obj)
-      .then((r) => {
-        profilePopup.close();
-        profileInfo.setUserInfo(r);
-
-        profileFormValidator.resetSubmitButton();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        renderLoading(false, profileEditForm, "Save");
-      });
-  },
-  handleClearError: () => {
-    profileFormValidator.clearError();
-  },
-  renderLoading: () => {
-    renderLoading(true, profileEditForm);
-  },
-});
-profilePopup.setEventListeners();
-profileButtonEdit.addEventListener("click", () => {
-  fillProfileForm(profileInfo.getUserInfo());
-  profilePopup.open();
-});
-
-//
 
 export const api = new Api(
   {
@@ -96,6 +47,7 @@ export const api = new Api(
   },
   checkResponse
 );
+const profileInfo = new UserInfo(profileTitle, profileSubtitle, propic);
 
 const newCardsSection = new Section(
   {
@@ -110,14 +62,45 @@ api
   .returnUserInfoAndCards()
   .then((res) => {
     profileInfo.setUserInfo(res[0]);
-
     newCardsSection.setItems(res[1].toReversed());
     newCardsSection.renderItems();
   })
   .catch((err) => console.error(err));
 
+//
+const profileFormValidator = new FormValidator(config, formProfile);
+profileFormValidator.enableValidation();
+const propicFormValidator = new FormValidator(config, formPropic);
+propicFormValidator.enableValidation();
+const cardsFormValidator = new FormValidator(config, formCards);
+cardsFormValidator.enableValidation();
+
+const profilePopup = new PopupWithForm(modalProfileEdit, {
+  handleFormSubmit: (obj) => {
+    api
+      .editProfile(obj)
+      .then((r) => {
+        profilePopup.close();
+        profileInfo.setUserInfo(r);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        renderLoading(false, formProfile, "Save");
+      });
+  },
+  handleClearError: () => {
+    profileFormValidator.resetForm();
+  },
+  renderLoading: () => {
+    renderLoading(true, formProfile);
+  },
+});
+profilePopup.setEventListeners();
+
 const avatarPopup = new PopupWithForm(
-  propicModal,
+  modalPropic,
   {
     handleFormSubmit: (obj) => {
       api
@@ -125,50 +108,25 @@ const avatarPopup = new PopupWithForm(
         .then((r) => {
           avatarPopup.close();
           profileInfo.setUserInfo(r);
-
-          propicFormValidator.resetSubmitButton();
         })
         .catch((err) => console.error(err))
         .finally(() => {
-          renderLoading(false, propicForm, "Save");
+          renderLoading(false, formPropic, "Save");
         });
     },
     handleClearError: () => {
-      propicFormValidator.clearError();
+      propicFormValidator.resetForm();
     },
     renderLoading: () => {
-      renderLoading(true, propicForm);
+      renderLoading(true, formPropic);
     },
   },
   propicFormValidator
 );
 avatarPopup.setEventListeners();
 
-propicButtonEdit.addEventListener("click", () => {
-  avatarPopup.open();
-});
-
-export const deletePopup = new PopupWithConfirmation(deleteModal, {
-  handleFormSubmit: (cardElement, objId) => {
-    api
-      .deleteCard(objId)
-      .then((r) => {
-        cardElement.remove();
-        deletePopup.close();
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        renderLoading(false, deleteForm, "Yes");
-      });
-  },
-  renderLoading: () => {
-    renderLoading(true, deleteForm);
-  },
-});
-deletePopup.setEventListener();
-
 const cardsPopup = new PopupWithForm(
-  cardsModal,
+  modalCards,
   {
     handleFormSubmit: (obj) => {
       api
@@ -178,24 +136,56 @@ const cardsPopup = new PopupWithForm(
 
           newCardsSection.setItems([r]);
           newCardsSection.renderItems();
-
-          cardsFormValidator.resetSubmitButton();
         })
         .catch((err) => console.error(err))
         .finally(() => {
-          renderLoading(false, cardsEditForm, "Create");
+          renderLoading(false, formCards, "Create");
         });
     },
     handleClearError: () => {
-      cardsFormValidator.clearError();
+      cardsFormValidator.resetForm();
     },
     renderLoading: () => {
-      renderLoading(true, cardsEditForm);
+      renderLoading(true, formCards);
     },
   },
   cardsFormValidator
 );
 cardsPopup.setEventListeners();
-cardsButtonAdd.addEventListener("click", () => {
+
+buttonEditProfile.addEventListener("click", () => {
+  fillProfileForm(profileInfo.getUserInfo());
+  profilePopup.open();
+});
+buttonEditPropic.addEventListener("click", () => {
+  avatarPopup.open();
+});
+buttonAddCard.addEventListener("click", () => {
   cardsPopup.open();
 });
+
+export const previewPopup = new PopupWithImage(
+  modalCard,
+  cardModalImage,
+  cardModalTitle
+);
+previewPopup.setEventListeners();
+
+export const deletePopup = new PopupWithConfirmation(modalDelete, {
+  handleFormSubmit: (cardElement, objId) => {
+    api
+      .deleteCard(objId)
+      .then((r) => {
+        cardElement.remove();
+        deletePopup.close();
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        renderLoading(false, formDelete, "Yes");
+      });
+  },
+  renderLoading: () => {
+    renderLoading(true, formDelete);
+  },
+});
+deletePopup.setEventListener();

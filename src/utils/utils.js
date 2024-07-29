@@ -22,7 +22,7 @@ export function createCard(item) {
 }
 */
 export function createCard(item) {
-  const card = new Card(item, "#card-template", handleImageClick, {
+  const cardInstance = new Card(item, "#card-template", handleImageClick, {
     handleDelete: (cardElement, id) => {
       deletePopup.open();
       deletePopup.catchSelectedCard(cardElement, id);
@@ -31,7 +31,7 @@ export function createCard(item) {
       api
         .addLike(id)
         .then((r) => {
-          card.handleLikeButton();
+          cardInstance.handleLikeButton();
         })
         .catch((err) => console.log(err));
     },
@@ -39,12 +39,12 @@ export function createCard(item) {
       api
         .deleteLike(id)
         .then((r) => {
-          card.handleLikeButton();
+          cardInstance.handleLikeButton();
         })
         .catch((err) => console.log(err));
     },
   });
-  return card.generateCard();
+  return cardInstance.generateCard();
 }
 
 export function renderLoading(isLoading, form, text) {

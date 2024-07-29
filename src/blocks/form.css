@@ -1,39 +1,35 @@
 .form {
-  max-width: 358px;
-  width: 100%;
-  margin: auto;
+  margin: 0 34px 34px;
 }
 
 .form__fieldset {
   margin: 0;
   padding: 0;
   margin-bottom: 30px;
+  border: none;
+
+  max-height: 35px;
+}
+
+.form__input {
+  margin: 0;
+  padding: 0;
   height: 27px;
+  line-height: 14px;
+  width: 100%;
+
   border-top: none;
   border-right: none;
   border-left: none;
   border-bottom-width: 1px;
   border-bottom-color: black;
 }
-
-.form__input {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  height: 27px;
-  border: none;
-  line-height: 14px;
+.form__input_type_error {
+  border-bottom-color: red;
 }
-
 .form__input-error {
   display: none;
 }
-
-.form__input_type_error {
-  display: block;
-  border-bottom: 1px solid red;
-}
-
 .form__input-error_active {
   display: block;
   font-size: 12px;
@@ -53,38 +49,28 @@
   color: white;
   border: none;
   margin-top: 18px;
-  margin-bottom: 36px;
 }
-
-.form__button_type_delete {
-  margin-top: 0;
-}
-
-.form__button:hover:not(:disabled) {
+.form__button:hover {
   opacity: 0.8;
   cursor: pointer;
 }
-.button_inactive {
+.form__button:disabled {
   color: black;
   border: 1px solid black;
   background-color: white;
   opacity: 0.2;
   cursor: default;
 }
+
+.form__button_type_delete {
+  margin-top: 0;
+}
 @media screen and (max-width: 320px) {
   .form {
-    max-width: 238px;
-    width: 100%;
-    margin: auto;
-  }
-
-  .form__fieldset {
-    min-height: 27px;
+    margin: 0 22px 22px;
   }
 
   .form__button {
-    width: 100%;
-    min-height: 46px;
-    margin: 15px 0 25px;
+    margin-top: 15px;
   }
 }
